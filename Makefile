@@ -10,8 +10,6 @@ ifndef ARCH
   ${info Not ARCH define, use: "ARCH=armhf" or "ARCH=x86". Set default: $(ARCH)}
 endif
 
-create_glial_dist: copy_core copy_panel remove_unused_core_files
-
 make_deb_packet: create_glial_dist copy_armhf_rocks create_artefacts_packet_folder
 	mkdir -p ./$(PACKET_DIR)/glial/usr/share/tarantool/glial/
 	mkdir -p ./$(PACKET_DIR)/glial/etc/tarantool/instances.enabled/
@@ -57,6 +55,8 @@ create_artefacts_packet_folder: remove_artefacts_packet_folder
 	mkdir ./$(PACKET_DIR)
 
 #------------------------------------------------------------#
+
+create_glial_dist: copy_core copy_panel remove_unused_core_files
 
 build_panel: submodules_update
 	cd ./panel && npm install && npm run build

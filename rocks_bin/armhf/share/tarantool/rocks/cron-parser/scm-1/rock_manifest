@@ -1,0 +1,16 @@
+rock_manifest = {
+   ["cron-parser-scm-1.rockspec"] = "abe2d900da448a04d61c578a2b93e7dc",
+   doc = {
+      ["README.md"] = "75b995e8b538b1dc95fbbcd7d72f4612"
+   },
+   lib = {
+      cron = {
+         ["ccronexpr.so"] = "36890a22f03ddc9e68538821c7240182"
+      }
+   },
+   lua = {
+      cron = {
+         ["init.lua"] = "d0cf8dc51cb260996b3e835ae704487e"
+      }
+   }
+}

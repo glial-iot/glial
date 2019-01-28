@@ -1,0 +1,12 @@
+rock_manifest = {
+   doc = {
+      LICENSE = "5227a01010094bf0a01cf78e1f762ed9",
+      ["README.md"] = "5e527b1d08b603ad873833ea9ab63d1c"
+   },
+   ["dump-scm-1.rockspec"] = "7048bdca9f8153507cbeaa7a0a80fc87",
+   lua = {
+      dump = {
+         ["init.lua"] = "9815138045ae724432542a5f80c94454"
+      }
+   }
+}

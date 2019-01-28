@@ -7,8 +7,10 @@ build_panel: submodule_update
 
 submodules_update:
 	git submodule update --init
-	cd ./core/ && git fetch && git merge origin master
-	cd ./panel/ && git fetch && git merge origin master
+	git submodule foreach git fetch
+	git submodule foreach git merge origin master
+	#cd ./core/ && git fetch && git merge origin master
+	#cd ./panel/ && git fetch && git merge origin master
 
 copy_core: create_artefacts_folder
 	cp -r ./core/* ./build_artefacts/

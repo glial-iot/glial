@@ -4,6 +4,3 @@
 [submodule "panel"]
 	path = panel
 	url = https://github.com/glial-iot/glial_panel.git
-[submodule "rocks"]
-	path = rocks
-	url = https://github.com/glial-iot/glial_rocks.git

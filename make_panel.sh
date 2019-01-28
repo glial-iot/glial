@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+git submodule update
+
 rm -rf ./build_artefacts
 
 mkdir ./build_artefacts

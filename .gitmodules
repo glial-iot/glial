@@ -1,0 +1,12 @@
+[submodule "core"]
+	path = core
+	url = https://github.com/glial-iot/glial_core.git
+[submodule "panel"]
+	path = panel
+	url = https://github.com/glial-iot/glial_panel.git
+[submodule "rocks"]
+	path = rocks
+	url = https://github.com/glial-iot/glial_rocks.git
+[submodule "packet_make/rocks"]
+	path = packet_make/rocks
+	url = https://github.com/glial-iot/glial_rocks.git

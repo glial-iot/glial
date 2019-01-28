@@ -7,7 +7,7 @@ build_panel: submodule_update
 
 submodules_update:
 	git submodule update --init
-	cd ./core/ && git merge origin develop
+	cd ./core/ && git merge origin master
 	cd ./panel/ && git merge origin master
 
 copy_core: create_artefacts_folder

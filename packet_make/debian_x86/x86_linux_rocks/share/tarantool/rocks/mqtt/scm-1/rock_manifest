@@ -1,0 +1,17 @@
+rock_manifest = {
+   doc = {
+      LICENSE = "10e5ae257b03d9f1d0b765acc3151bbb",
+      ["README.md"] = "28e3d0c3bee99ba76d7ff26058274138"
+   },
+   lib = {
+      mqtt = {
+         ["driver.so"] = "97f2b23870e4f744e617247031327d1e"
+      }
+   },
+   lua = {
+      mqtt = {
+         ["init.lua"] = "d68a6a86395ee7620aec64786fe4572a"
+      }
+   },
+   ["mqtt-scm-1.rockspec"] = "91c908c4cf181231656605550e80306d"
+}

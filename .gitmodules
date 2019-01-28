@@ -1,6 +1,0 @@
-[submodule "core"]
-	path = core
-	url = https://github.com/glial-iot/glial_core.git
-[submodule "panel"]
-	path = panel
-	url = https://github.com/glial-iot/glial_panel.git

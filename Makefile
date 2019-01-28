@@ -5,8 +5,10 @@ create_glial_dist: copy_core copy_panel remove_unused_core_files
 build_panel: submodule_update
 	cd ./panel && npm install && npm run build
 
-submodule_update:
-	git submodule update
+submodules_update:
+	git submodule update --init
+	cd ./core/ && git merge origin develop
+	cd ./panel/ && git merge origin master
 
 copy_core: create_artefacts_folder
 	cp -r ./core/* ./build_artefacts/

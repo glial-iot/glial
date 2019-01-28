@@ -7,6 +7,3 @@
 [submodule "rocks"]
 	path = rocks
 	url = https://github.com/glial-iot/glial_rocks.git
-[submodule "packet_make/rocks"]
-	path = packet_make/rocks
-	url = https://github.com/glial-iot/glial_rocks.git

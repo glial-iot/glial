@@ -78,6 +78,10 @@ remove_unused_core_files: create_artefacts_dist_folder copy_core
 	rm -rf $(DIST_DIR)/glial.code-workspace
 	rm -rf $(DIST_DIR)/Dockerfile
 	rm -rf $(DIST_DIR)/tests
+	rm -rf $(DIST_DIR)/.git
+	rm -rf $(DIST_DIR)/.gitignore
+	rm -rf $(DIST_DIR)/.gitmodules
+	rm -rf $(DIST_DIR)/.travis.yml
 
 copy_panel: create_artefacts_dist_folder build_panel
 	rm -rf $(PANEL_DIR)

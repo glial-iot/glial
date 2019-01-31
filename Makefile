@@ -1,10 +1,12 @@
 DIST_DIR = ./build_artefacts_dist
 PACKET_DIR = ./build_artefacts_packet
-ROCKS_DIR = ./rocks_bin
-DEBIAN_DIR = $(PACKET_DIR)/glial/DEBIAN
-PANEL_DIR = $(DIST_DIR)/panel
+CORE_DIR = ./core
+PANEL_DIR = ./panel
 
-VERSION = `cd ./core/ && git describe --dirty --always --tags | cut -c 2-`
+DEBIAN_DIR = $(PACKET_DIR)/glial/DEBIAN
+PANEL_DIST_DIR = $(DIST_DIR)/panel
+
+VERSION = `cd $(CORE_DIR)/ && git describe --dirty --always --tags | cut -c 2-`
 SIZE = `du -sk $(PACKET_DIR)/glial | awk '{print $$1}'`
 
 ifndef ARCH
@@ -55,7 +57,7 @@ create_artefacts_packet_folder: remove_artefacts_packet_folder
 create_glial_dist: copy_core copy_panel remove_unused_core_files
 
 build_panel: submodules_update
-	cd ./panel && npm install && npm run build
+	cd $(PANEL_DIR) && npm install && npm run build
 
 submodules_update:
 	git submodule update --init
@@ -63,7 +65,7 @@ submodules_update:
 	git submodule foreach git merge origin master
 
 copy_core: create_artefacts_dist_folder submodules_update
-	cp -r ./core/* $(DIST_DIR)/
+	cp -r $(CORE_DIR)/* $(DIST_DIR)/
 
 remove_unused_core_files: create_artefacts_dist_folder copy_core
 	rm -rf $(DIST_DIR)/README.md
@@ -78,14 +80,13 @@ remove_unused_core_files: create_artefacts_dist_folder copy_core
 	rm -rf $(DIST_DIR)/.travis.yml
 
 copy_panel: create_artefacts_dist_folder build_panel
-	rm -rf $(PANEL_DIR)
-	mkdir $(PANEL_DIR)
-	mkdir $(PANEL_DIR)/public
-	mkdir $(PANEL_DIR)/public/admin
-	mkdir $(PANEL_DIR)/templates
-	cp ./panel/dist/index.html $(PANEL_DIR)/templates/
-	cp -r ./panel/dist/* $(PANEL_DIR)/public/admin/
-	rm -rf ./panel/dist
+	rm -rf $(PANEL_DIST_DIR)
+	mkdir $(PANEL_DIST_DIR)
+	mkdir -p $(PANEL_DIST_DIR)/public/admin
+	mkdir $(PANEL_DIST_DIR)/templates
+	cp $(PANEL_DIR)/dist/index.html $(PANEL_DIST_DIR)/templates/
+	cp -r $(PANEL_DIR)/dist/* $(PANEL_DIST_DIR)/public/admin/
+	rm -rf $(PANEL_DIR)/dist
 
 remove_artefacts_dist_folder:
 	rm -rf $(DIST_DIR)

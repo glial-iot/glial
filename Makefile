@@ -33,15 +33,9 @@ create_deb_files:
 	cp ./packet_make/dirs $(DEBIAN_DIR)/dirs
 	cp ./packet_make/prerm $(DEBIAN_DIR)/prerm
 	cp ./packet_make/postinst $(DEBIAN_DIR)/postinst
+	cp ./packet_make/control $(DEBIAN_DIR)/control
 
-	echo "Package: glial" > $(DEBIAN_DIR)/control
-	echo "Maintainer: vvzvlad <vvzvlad@gmail.com>" >> $(DEBIAN_DIR)/control
 	echo "Architecture: $(ARCH)" >> $(DEBIAN_DIR)/control
-	echo "Section: misc" >> $(DEBIAN_DIR)/control
-	echo "Description: IoT management system by Nokia IoT Lab" >> $(DEBIAN_DIR)/control
-	echo "Priority: optional" >> $(DEBIAN_DIR)/control
-	echo "Origin: vvzvlad <vvzvlad@gmail.com>" >> $(DEBIAN_DIR)/control
-	echo "Depends: tarantool, libmosquitto-dev, tarantool-dev" >> $(DEBIAN_DIR)/control
 	echo "Version: "$(VERSION) >> $(DEBIAN_DIR)/control
 	echo "Installed-Size: "$(SIZE) >> $(DEBIAN_DIR)/control
 

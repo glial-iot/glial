@@ -1,0 +1,8 @@
+Package: glial
+Maintainer: vvzvlad <vvzvlad@gmail.com>
+Section: misc
+Description: IoT management system by Nokia IoT Lab
+Priority: optional
+Origin: Nokia IoT Laboratory <info@glial.pro>
+Depends: tarantool, libmosquitto-dev, tarantool-dev
+Homepage: http://glial.pro

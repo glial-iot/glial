@@ -4,6 +4,7 @@
 
 DIST_DIR = ./build_artefacts_dist
 PACKET_DIR = ./build_artefacts_packet
+ROCKS_DIR = ./rocks_bin
 CORE_DIR = ./core
 PANEL_DIR = ./panel
 

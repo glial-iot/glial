@@ -1,3 +1,7 @@
+#.SILENT: make_deb_packet create_deb_files copy_armhf_rocks remove_artefacts_packet_folder create_artefacts_packet_folder create_glial_dist build_panel submodules_update copy_core remove_unused_core_files copy_panel remove_artefacts_dist_folder create_artefacts_dist_folder
+
+.DEFAULT: make_deb_packet
+
 DIST_DIR = ./build_artefacts_dist
 PACKET_DIR = ./build_artefacts_packet
 CORE_DIR = ./core
@@ -57,7 +61,8 @@ create_artefacts_packet_folder: remove_artefacts_packet_folder
 create_glial_dist: copy_core copy_panel remove_unused_core_files
 
 build_panel: submodules_update
-	cd $(PANEL_DIR) && npm install && npm run build
+	npm install --prefix $(PANEL_DIR)
+	npm run build --prefix $(PANEL_DIR)
 
 submodules_update:
 	git submodule update --init

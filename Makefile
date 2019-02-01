@@ -19,6 +19,11 @@ ifndef ARCH
   ${info Not ARCH define, use: "ARCH=armhf" or "ARCH=x86_linux". Set default: $(ARCH)}
 endif
 
+ifndef branch
+  BRANCH = master
+  ${info Not BRANCH define, use: "BRANCH=master" or "BRANCH=develop". Set default: $(ARCH)}
+endif
+
 make_deb_packet: create_glial_dist copy_armhf_rocks create_artefacts_packet_folder
 	mkdir -p $(PACKET_DIR)/glial/usr/share/tarantool/glial/
 	mkdir -p $(PACKET_DIR)/glial/etc/tarantool/instances.enabled/
@@ -68,7 +73,7 @@ build_panel: submodules_update
 submodules_update:
 	git submodule update --init
 	git submodule foreach git fetch
-	git submodule foreach git merge origin master
+	git submodule foreach git merge origin $(BRANCH)
 
 copy_core: create_artefacts_dist_folder submodules_update
 	cp -r $(CORE_DIR)/* $(DIST_DIR)/

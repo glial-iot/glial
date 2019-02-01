@@ -14,14 +14,20 @@ PANEL_DIST_DIR = $(DIST_DIR)/panel
 VERSION = `cd $(CORE_DIR)/ && git describe --dirty --always --tags | cut -c 2-`
 SIZE = `du -sk $(PACKET_DIR)/glial | awk '{print $$1}'`
 
+ifdef ARCH
+  ${info ARCH set to $(ARCH)}
+endif
 ifndef ARCH
   ARCH = armhf
-  ${info Not ARCH define, use: "ARCH=armhf" or "ARCH=x86_linux". Set default: $(ARCH)}
+  ${info Not ARCH define, use "ARCH=armhf" or "ARCH=x86_linux". Set default: $(ARCH)}
 endif
 
+ifdef BRANCH
+  ${info BRANCH set to $(BRANCH)}
+endif
 ifndef BRANCH
   BRANCH = master
-  ${info Not BRANCH define, use: "BRANCH=master" or "BRANCH=develop". Set default: $(BRANCH)}
+  ${info Not BRANCH define, use "BRANCH=master" or "BRANCH=develop". Set default: $(BRANCH)}
 endif
 
 make_deb_packet: create_glial_dist copy_armhf_rocks create_artefacts_packet_folder

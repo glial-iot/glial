@@ -1,2 +1,3 @@
 /build_artefacts
 /build_artefacts_dist
+*.deb

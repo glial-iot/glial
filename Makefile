@@ -1,6 +1,5 @@
 .DEFAULT: make_deb_packets
 
-
 DIST_DIR = ./build_artefacts_dist
 PACKET_DIR = ./build_artefacts_packet
 ROCKS_DIR = ./rocks_bin
@@ -21,6 +20,15 @@ ifndef BRANCH
  ${info Not BRANCH define, use "BRANCH=master" or "BRANCH=develop". Set default: $(BRANCH)}
 endif
 
+NB =
+ifeq ($(BRANCH), develop)
+ NB = -night
+ ${info Build type: night}
+endif
+
+#------------------------------MAIN TARGET------------------------------#
+
+
 MAKE_PARAM = -f $(lastword $(MAKEFILE_LIST)) BRANCH=$(BRANCH)
 
 make_deb_packets:
@@ -34,7 +42,7 @@ make_deb_packets:
 
 	$(MAKE) $(MAKE_PARAM) clean_panel clean_core
 
-#------------------------------------------------------------#
+#---------------------------GENERATE TARGET---------------------------------#
 
 # 1: arch, 2: arch_patch
 define generate-targets
@@ -43,7 +51,7 @@ make_deb_packet_$(1): copy_rocks_$(1)
 	mkdir -p $$(PACKET_DIR)/glial/etc/tarantool/instances.enabled/
 	cp ./packet_make/instance_glial_start.lua $$(PACKET_DIR)/glial/etc/tarantool/instances.enabled/glial.lua
 	cp -r $$(DIST_DIR)/* $$(PACKET_DIR)/glial/usr/share/tarantool/glial/
-	echo $$(VERSION) > $$(PACKET_DIR)/glial/usr/share/tarantool/glial/VERSION
+	echo $$(VERSION)$$(NB) > $$(PACKET_DIR)/glial/usr/share/tarantool/glial/VERSION
 
 	mkdir -p $$(DEBIAN_DIR)
 	cp ./packet_make/dirs $$(DEBIAN_DIR)/dirs
@@ -52,15 +60,15 @@ make_deb_packet_$(1): copy_rocks_$(1)
 	cp ./packet_make/control $$(DEBIAN_DIR)/control
 
 	echo "Architecture: $(1)" >> $$(DEBIAN_DIR)/control
-	echo "Version: "$$(VERSION) >> $$(DEBIAN_DIR)/control
+	echo "Version: "$$(VERSION)$$(NB) >> $$(DEBIAN_DIR)/control
 	echo "Installed-Size: "$$(SIZE) >> $$(DEBIAN_DIR)/control
 
 	#chown -R root:root $$(PACKET_DIR)/glial/
 	#chown -R tarantool:tarantool $$(PACKET_DIR)/glial/etc/tarantool/
 	#chown -R tarantool:tarantool $$(PACKET_DIR)/glial/usr/share/tarantool/
 
-	dpkg-deb --build $$(PACKET_DIR)/glial glial_$$(VERSION)_$(1).deb
-	dpkg-deb -I glial_$$(VERSION)_$(1).deb ##сделать добавку nightbuild при сборке из develop
+	dpkg-deb --build $$(PACKET_DIR)/glial glial_$$(VERSION)$$(NB)_$(1).deb
+	dpkg-deb -I glial_$$(VERSION)$$(NB)_$(1).deb
 
 copy_rocks_$(1): clear_artefacts_packet_folder_$(1)
 	mkdir $$(PACKET_DIR)

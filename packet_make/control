@@ -6,3 +6,4 @@ Priority: optional
 Origin: Nokia IoT Laboratory <info@glial.pro>
 Depends: tarantool, libmosquitto-dev, tarantool-dev
 Homepage: http://glial.pro
+Vcs-Git: git://git@github.com:glial-iot/glial_core.git

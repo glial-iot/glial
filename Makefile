@@ -61,10 +61,6 @@ make_deb_packet_$(1): create_dirs_$(1) copy_rocks_$(1)
 	echo "Version: "$$(VERSION)$$(NB) >> $$(DEBIAN_DIR)/control
 	echo "Installed-Size: "$$(SIZE) >> $$(DEBIAN_DIR)/control
 
-	#chown -R root:root $$(PACKET_DIR)/glial/
-	#chown -R tarantool:tarantool $$(PACKET_DIR)/glial/etc/tarantool/
-	#chown -R tarantool:tarantool $$(PACKET_DIR)/glial/usr/share/tarantool/
-
 	dpkg-deb --build $$(PACKET_DIR)/glial glial_$$(VERSION)$$(NB)_$(1).deb
 	dpkg-deb -I glial_$$(VERSION)$$(NB)_$(1).deb
 

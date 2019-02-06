@@ -112,11 +112,13 @@ submodules_update:
 
 #-----------------------------CORE-------------------------------#
 
-make_core: submodules_update clean_core
+make_core: submodules_update copy_core remove_unused_core_files
+
+copy_core: clean_core
 	mkdir $(DIST_DIR)
 	cp -r $(CORE_DIR)/* $(DIST_DIR)/
 
-remove_unused_core_files: make_core
+remove_unused_core_files:
 	rm -rf $(DIST_DIR)/README.md
 	rm -rf $(DIST_DIR)/changelog.md
 	rm -rf $(DIST_DIR)/LICENSE

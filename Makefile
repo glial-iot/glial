@@ -84,7 +84,7 @@ endef
 #------------------------------------------------------------#
 
 $(eval $(call generate-targets,armhf,armhf))
-$(eval $(call generate-targets,amd64,x86_linux))
+$(eval $(call generate-targets,amd64,amd64))
 
 #-----------------------------PANEL-------------------------------#
 

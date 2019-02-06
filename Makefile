@@ -46,9 +46,11 @@ make_deb_packets:
 
 # 1: arch, 2: arch_patch
 define generate-targets
-make_deb_packet_$(1): copy_rocks_$(1)
+create_dirs_$(1):
 	mkdir -p $$(PACKET_DIR)/glial/usr/share/tarantool/glial/
 	mkdir -p $$(PACKET_DIR)/glial/etc/tarantool/instances.enabled/
+
+make_deb_packet_$(1): create_dirs_$(1) copy_rocks_$(1)
 	cp ./packet_make/instance_glial_start.lua $$(PACKET_DIR)/glial/etc/tarantool/instances.enabled/glial.lua
 	cp -r $$(DIST_DIR)/* $$(PACKET_DIR)/glial/usr/share/tarantool/glial/
 	echo $$(VERSION)$$(NB) > $$(PACKET_DIR)/glial/usr/share/tarantool/glial/VERSION
@@ -70,11 +72,9 @@ make_deb_packet_$(1): copy_rocks_$(1)
 	dpkg-deb --build $$(PACKET_DIR)/glial glial_$$(VERSION)$$(NB)_$(1).deb
 	dpkg-deb -I glial_$$(VERSION)$$(NB)_$(1).deb
 
-copy_rocks_$(1): clear_artefacts_packet_folder_$(1)
-	mkdir $$(PACKET_DIR)
-	mkdir $$(PACKET_DIR)/.rocks
-	cp -r $$(ROCKS_DIR)/$(2)/* $$(PACKET_DIR)/.rocks
-	mkdir $$(PACKET_DIR)/glial/
+copy_rocks_$(1): clear_artefacts_packet_folder_$(1) create_dirs_$(1)
+	mkdir $$(PACKET_DIR)/usr/share/tarantool/glial/.rocks
+	cp -r $$(ROCKS_DIR)/$(2)/* $$(PACKET_DIR)/usr/share/tarantool/glial/.rocks
 
 clear_artefacts_packet_folder_$(1):
 	rm -rf $$(PACKET_DIR)

@@ -73,8 +73,8 @@ make_deb_packet_$(1): create_dirs_$(1) copy_rocks_$(1)
 	dpkg-deb -I glial_$$(VERSION)$$(NB)_$(1).deb
 
 copy_rocks_$(1): clear_artefacts_packet_folder_$(1) create_dirs_$(1)
-	mkdir $$(PACKET_DIR)/usr/share/tarantool/glial/.rocks
-	cp -r $$(ROCKS_DIR)/$(2)/* $$(PACKET_DIR)/usr/share/tarantool/glial/.rocks
+	mkdir $$(PACKET_DIR)/glial/usr/share/tarantool/glial/.rocks
+	cp -r $$(ROCKS_DIR)/$(2)/* $$(PACKET_DIR)/glial/usr/share/tarantool/glial/.rocks/
 
 clear_artefacts_packet_folder_$(1):
 	rm -rf $$(PACKET_DIR)

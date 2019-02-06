@@ -1,3 +1,13 @@
 #!/bin/sh
+#DEBHELPER#
+
+set -e
+USER="tarantool"
+
+if id -u $USER > /dev/null 2>&1; then
+    chown ${USER}:${USER} /etc/tarantool/instances.enabled/glial.lua
+    chown -R ${USER}:${USER} /usr/share/tarantool/glial/
+fi
+
 /usr/bin/tarantoolctl stop glial
 /usr/bin/tarantoolctl start glial

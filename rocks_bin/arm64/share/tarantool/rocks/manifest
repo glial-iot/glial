@@ -1,0 +1,147 @@
+commands = {}
+dependencies = {
+   ["cron-parser"] = {
+      ["scm-1"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   },
+   dump = {
+      ["scm-1"] = {
+         {
+            constraints = {
+               {
+                  op = "==",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   },
+   http = {
+      ["scm-1"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   },
+   mqtt = {
+      ["scm-1"] = {
+         {
+            constraints = {
+               {
+                  op = ">=",
+                  version = {
+                     5, 1, string = "5.1"
+                  }
+               }
+            },
+            name = "lua"
+         }
+      }
+   }
+}
+modules = {
+   cron = {
+      "cron-parser/scm-1"
+   },
+   ["cron.ccronexpr"] = {
+      "cron-parser/scm-1"
+   },
+   dump = {
+      "dump/scm-1"
+   },
+   ["http.codes"] = {
+      "http/scm-1"
+   },
+   ["http.lib"] = {
+      "http/scm-1"
+   },
+   ["http.mime_types"] = {
+      "http/scm-1"
+   },
+   ["http.server"] = {
+      "http/scm-1"
+   },
+   mqtt = {
+      "mqtt/scm-1"
+   },
+   ["mqtt.driver"] = {
+      "mqtt/scm-1"
+   }
+}
+repository = {
+   ["cron-parser"] = {
+      ["scm-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               cron = "cron/init.lua",
+               ["cron.ccronexpr"] = "cron/ccronexpr.so"
+            }
+         }
+      }
+   },
+   dump = {
+      ["scm-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               dump = "dump/init.lua"
+            }
+         }
+      }
+   },
+   http = {
+      ["scm-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               ["http.codes"] = "http/codes.lua",
+               ["http.lib"] = "http/lib.so",
+               ["http.mime_types"] = "http/mime_types.lua",
+               ["http.server"] = "http/server.lua"
+            }
+         }
+      }
+   },
+   mqtt = {
+      ["scm-1"] = {
+         {
+            arch = "installed",
+            commands = {},
+            dependencies = {},
+            modules = {
+               mqtt = "mqtt/init.lua",
+               ["mqtt.driver"] = "mqtt/driver.so"
+            }
+         }
+      }
+   }
+}

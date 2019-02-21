@@ -4,6 +4,6 @@ Section: misc
 Description: IoT management system by Nokia IoT Lab
 Priority: optional
 Origin: Nokia IoT Laboratory <info@glial.pro>
-Depends: tarantool, libmosquitto-dev, tarantool-dev
+Depends: tarantool (>= 1.10.0), libmosquitto-dev, tarantool-dev (>= 1.10.0)
 Homepage: http://glial.pro
 Vcs-Git: git://git@github.com:glial-iot/glial_core.git

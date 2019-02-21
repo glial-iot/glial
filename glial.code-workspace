@@ -10,6 +10,7 @@
          "activityBar.background": "#124575",
          "titleBar.activeBackground": "#345B7F",
          "titleBar.activeForeground": "#FFFFFF",
-      }
+      },
+      "python.pythonPath": "/usr/local/opt/python/bin/python3.7"
    }
 }

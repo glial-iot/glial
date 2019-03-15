@@ -104,12 +104,50 @@ detect_os ()
   echo "Detected operating system as $os/$dist."
 }
 
-main ()
-{
-  detect_os
-  curl_check
-  gpg_check
 
+install_tarantool ()
+{
+  # Need to first run apt-get update so that apt-transport-https can be
+  # installed
+  echo -n "Running apt-get update... "
+  apt-get update &> /dev/null
+  echo "done."
+
+  # Install the debian-archive-keyring package on debian systems so that
+  # apt-transport-https can be installed next
+  install_debian_keyring
+
+  echo -n "Installing apt-transport-https... "
+  apt-get install -y apt-transport-https &> /dev/null
+  echo "done."
+
+  gpg_key_url="http://download.tarantool.org/tarantool/1.10/gpgkey"
+  apt_source_path="/etc/apt/sources.list.d/tarantool_1_10.list"
+
+  echo -n "Installing $apt_source_path..."
+
+  # create an apt config file for this repository
+  release=`lsb_release -c -s`
+  rm -f /etc/apt/sources.list.d/*tarantool*.list
+  echo "deb http://download.tarantool.org/tarantool/1.10/debian/ ${release} main" > $apt_source_path
+  echo "deb-src http://download.tarantool.org/tarantool/1.10/debian/ ${release} main" >> $apt_source_path
+
+  echo -n "Importing gpg key... "
+  # import the gpg key
+  curl -L "${gpg_key_url}" 2> /dev/null | apt-key add - &>/dev/null
+  echo "done."
+
+  echo -n "Running apt-get update... "
+  # update apt on this system
+  apt-get update &> /dev/null
+  echo "done."
+
+  echo
+  echo "The repository is setup! You can now install packages."
+}
+
+install_glial ()
+{
   # Need to first run apt-get update so that apt-transport-https can be
   # installed
   echo -n "Running apt-get update... "
@@ -147,4 +185,8 @@ main ()
   echo "The repository is setup! You can now install packages."
 }
 
-main
+detect_os
+curl_check
+gpg_check
+install_tarantool
+install_glial

@@ -148,9 +148,16 @@ install_glial_rep ()
   echo "done."
 }
 
+install_tarantool ()
+{
+  echo -n "Installing tarantool... "
+  apt-get install -y tarantool &> /dev/null
+  echo "done."
+}
+
 install_glial ()
 {
-  echo -n "Installing Glial... "
+  echo -n "Installing glial... "
   apt-get install -y glial &> /dev/null
   echo "done."
 }
@@ -167,5 +174,6 @@ install_glial_rep
 
 apt_get_update
 
+install_tarantool
 install_glial
 

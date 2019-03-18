@@ -148,12 +148,6 @@ install_glial_rep ()
   echo "done."
 }
 
-show_sudo_promt ()
-{
-  test
-}
-
-show_sudo_promt
 detect_os
 curl_check
 gpg_check

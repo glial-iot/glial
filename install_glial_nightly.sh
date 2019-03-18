@@ -148,19 +148,12 @@ install_glial_rep ()
   echo "done."
 }
 
-
 install_glial ()
 {
   echo -n "Installing Glial... "
   apt-get install -y glial
 }
 
-show_sudo_promt ()
-{
-  test
-}
-
-show_sudo_promt
 detect_os
 curl_check
 gpg_check

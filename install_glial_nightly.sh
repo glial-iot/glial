@@ -106,7 +106,7 @@ apt_get_update ()
   echo "done."
 }
 
-apt_transport_https ()
+apt_transport_https_install ()
 {
   echo -n "Installing apt-transport-https... "
   apt-get install -y apt-transport-https &> /dev/null
@@ -155,11 +155,17 @@ install_glial ()
   apt-get install -y glial
 }
 
+show_sudo_promt ()
+{
+  test
+}
+
+show_sudo_promt
 detect_os
 curl_check
 gpg_check
+apt_transport_https_install
 apt_get_update
-apt_transport_https
 install_debian_keyring
 
 install_tarantool_rep

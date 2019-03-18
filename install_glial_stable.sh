@@ -148,6 +148,12 @@ install_glial_rep ()
   echo "done."
 }
 
+install_glial ()
+{
+  echo -n "Installing Glial... "
+  apt-get install -y glial
+}
+
 detect_os
 curl_check
 gpg_check

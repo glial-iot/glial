@@ -13,7 +13,7 @@ gpg_check ()
     echo "Detected gpg..."
   else
     echo "Installing gnupg for GPG verification..."
-    apt-get install -y gnupg
+    apt-get install -yqq gnupg
     if [ "$?" -ne "0" ]; then
       echo "Unable to install GPG! Your base system has a problem; please check your default OS's package repositories because GPG should work."
       echo "Repository installation aborted."
@@ -29,7 +29,7 @@ curl_check ()
     echo "Detected curl..."
   else
     echo "Installing curl..."
-    apt-get install -q -y curl
+    apt-get install -yqq curl
     if [ "$?" -ne "0" ]; then
       echo "Unable to install curl! Your base system has a problem; please check your default OS's package repositories because curl should work."
       echo "Repository installation aborted."
@@ -43,7 +43,7 @@ install_debian_keyring ()
   if [ "${os}" = "debian" ]; then
     echo "Installing debian-archive-keyring which is needed for installing "
     echo "apt-transport-https on many Debian systems."
-    apt-get install -y debian-archive-keyring &> /dev/null
+    apt-get install -yqq debian-archive-keyring
   fi
 }
 
@@ -109,7 +109,7 @@ apt_get_update ()
 apt_transport_https_install ()
 {
   echo -n "Installing apt-transport-https... "
-  apt-get install -y apt-transport-https &> /dev/null
+  apt-get install -yqq apt-transport-https
   echo "done."
 }
 
@@ -151,7 +151,7 @@ install_glial_rep ()
 install_glial ()
 {
   echo -n "Installing Glial... "
-  apt-get install -y glial
+  apt-get install -yqq glial
 }
 
 detect_os

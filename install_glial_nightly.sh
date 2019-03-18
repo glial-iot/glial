@@ -3,12 +3,6 @@
 unknown_os ()
 {
   echo "Unfortunately, your operating system distribution and version are not supported by this script."
-  echo
-  echo "You can override the OS detection by setting os= and dist= prior to running this script."
-  echo
-  echo "For example, to force Ubuntu Trusty: os=ubuntu dist=trusty ./script.sh"
-  echo
-  echo "Please email support@packagecloud.io and let us know if you run into any issues."
   exit 1
 }
 
@@ -104,22 +98,23 @@ detect_os ()
   echo "Detected operating system as $os/$dist."
 }
 
-install_tarantool ()
+
+apt_get_update ()
 {
-  # Need to first run apt-get update so that apt-transport-https can be
-  # installed
   echo -n "Running apt-get update... "
   apt-get update &> /dev/null
   echo "done."
+}
 
-  # Install the debian-archive-keyring package on debian systems so that
-  # apt-transport-https can be installed next
-  install_debian_keyring
-
+apt_transport_https ()
+{
   echo -n "Installing apt-transport-https... "
   apt-get install -y apt-transport-https &> /dev/null
   echo "done."
+}
 
+install_tarantool_rep ()
+{
   gpg_key_url="http://download.tarantool.org/tarantool/1.10/gpgkey"
   apt_source_path="/etc/apt/sources.list.d/tarantool_1_10.list"
 
@@ -135,33 +130,10 @@ install_tarantool ()
   # import the gpg key
   curl -L "${gpg_key_url}" 2> /dev/null | apt-key add - &>/dev/null
   echo "done."
-
-  echo -n "Running apt-get update... "
-  # update apt on this system
-  apt-get update &> /dev/null
-  echo "done."
-
-  echo
-  echo "The repository is setup! You can now install packages."
 }
 
-install_glial ()
+install_glial_rep ()
 {
-  # Need to first run apt-get update so that apt-transport-https can be
-  # installed
-  echo -n "Running apt-get update... "
-  apt-get update &> /dev/null
-  echo "done."
-
-  # Install the debian-archive-keyring package on debian systems so that
-  # apt-transport-https can be installed next
-  install_debian_keyring
-
-  echo -n "Installing apt-transport-https... "
-  apt-get install -y apt-transport-https &> /dev/null
-  echo "done."
-
-
   gpg_key_url="https://glial-iot.github.io/glial-nightly/PUBLIC.KEY"
   apt_source_path="/etc/apt/sources.list.d/glial_nightly.list"
 
@@ -174,18 +146,25 @@ install_glial ()
   # import the gpg key
   curl -L "${gpg_key_url}" 2> /dev/null | apt-key add - &>/dev/null
   echo "done."
+}
 
-  echo -n "Running apt-get update... "
-  # update apt on this system
-  apt-get update &> /dev/null
-  echo "done."
 
-  echo
-  echo "The repository is setup! You can now install packages."
+install_glial ()
+{
+  echo -n "Installing Glial... "
+  apt-get install -y glial
 }
 
 detect_os
 curl_check
 gpg_check
-install_tarantool
+apt_get_update
+apt_transport_https
+install_debian_keyring
+
+install_tarantool_rep
+install_glial_rep
+
+apt_get_update
+
 install_glial

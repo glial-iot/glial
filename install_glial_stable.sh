@@ -113,6 +113,13 @@ apt_transport_https_install ()
   echo "done."
 }
 
+apt_lsb_release_install ()
+{
+  echo -n "Installing lsb-release... "
+  apt-get install -y lsb-release &> /dev/null
+  echo "done."
+}
+
 install_tarantool_rep ()
 {
   gpg_key_url="http://download.tarantool.org/tarantool/1.10/gpgkey"
@@ -167,6 +174,7 @@ apt_get_update
 curl_check
 gpg_check
 apt_transport_https_install
+apt_lsb_release_install
 apt_get_update
 install_debian_keyring
 

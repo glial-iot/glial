@@ -163,6 +163,7 @@ install_glial ()
 }
 
 detect_os
+apt_get_update
 curl_check
 gpg_check
 apt_transport_https_install
